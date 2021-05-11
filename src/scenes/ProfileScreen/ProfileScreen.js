@@ -18,12 +18,17 @@ import UserKitchen from "./components/UserKitchen";
 
 // dummy data
 import { USER_DATA } from "./../../assets/data/data";
+import SCREENS from "../../constants/screenNames";
 
 export default function UserProfile({ route, navigation }) {
   const [user, setUser] = useState(USER_DATA);
 
-  const handleClickSettings = () => {
+  const onPressSettings = () => {
     alert(`Clicked settings button`);
+  };
+
+  const onPressEditProfile = () => {
+    navigation.navigate(SCREENS.EDIT_PROFILE_SCREEN);
   };
 
   return (
@@ -31,7 +36,7 @@ export default function UserProfile({ route, navigation }) {
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>My Kitchen</Text>
         <CustomizedButton
-          onPress={() => handleClickSettings()}
+          onPress={onPressSettings}
           style={styles.settingsButton}
         >
           <SettingsIcon />
@@ -46,6 +51,7 @@ export default function UserProfile({ route, navigation }) {
           title={user.title}
           followersCount={user.followersCount}
           likesCount={user.likesCount}
+          onPressEditProfile={onPressEditProfile}
           style={styles.userInfo}
         />
         <SeparatorLine style={styles.separatorLine} />

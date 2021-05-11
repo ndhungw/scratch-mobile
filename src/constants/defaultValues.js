@@ -11,10 +11,12 @@ const RECIPE_COMMENTS_COUNT_SAMPLE = 8;
 
 // USER_INFO
 const USER_AVATAR_SRC = AvatarSrc;
-const USER_DISPLAY_NAME = "Profile name";
-const USER_TITLE = "Profile title";
+const USER_DISPLAY_NAME = "Nick Evans";
+const USER_TITLE = "Potato Master";
 const USER_FOLLOWERS_COUNT = 0;
 const USER_LIKES_COUNT = 0;
+const USER_EMAIL = "user@email.com";
+const USER_PHONE = "0 12 345 6789";
 
 export {
   RECIPE_DESCRIPTION_SAMPLE,
@@ -29,4 +31,6 @@ export {
   USER_TITLE,
   USER_FOLLOWERS_COUNT,
   USER_LIKES_COUNT,
+  USER_EMAIL,
+  USER_PHONE,
 };

@@ -21,10 +21,9 @@ import CustomizedButton from "../../../components/Button/Button";
 
 // utils
 import { simplify } from "../../../utils/utils";
+import SCREENS from "../../../constants/screenNames";
 
 export default function UserInfo({
-  route,
-  navigation,
   style,
   // UserInfo props
   avatarSrc,
@@ -32,12 +31,11 @@ export default function UserInfo({
   title,
   followersCount,
   likesCount,
+  onPressEditProfile,
+  ...rest
 }) {
-  const handleClickEdit = () => {
-    alert(`Clicked edit button`);
-  };
   return (
-    <View style={[style, styles.container]}>
+    <View style={[style, styles.container]} {...rest}>
       <View style={styles.userInfoLeft}>
         <Avatar
           source={avatarSrc || USER_AVATAR_SRC}
@@ -52,7 +50,7 @@ export default function UserInfo({
               {displayName || USER_DISPLAY_NAME}
             </Text>
             <CustomizedButton
-              onPress={() => handleClickEdit()}
+              onPress={onPressEditProfile}
               style={styles.editButton}
             >
               <EditIcon />

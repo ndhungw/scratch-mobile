@@ -18,6 +18,9 @@ import imageSrc from "../../assets/images/login-bg.png";
 // components
 import CustomizedButton from "../../components/Button/Button";
 
+// test
+import TextField from "../../components/TextField/TextField";
+
 export default function LogIn({ navigation }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
