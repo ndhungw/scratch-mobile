@@ -1,5 +1,5 @@
-import * as React from "react";
-import Svg, { Path } from "react-native-svg";
+import * as React from 'react';
+import Svg, { Path } from 'react-native-svg';
 
 function EditIcon(props) {
   return (
@@ -9,8 +9,7 @@ function EditIcon(props) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+      {...props}>
       <Path
         clipRule="evenodd"
         d="M19.56 7.839a3 3 0 00-3-3v0l-11 11v3h3l11-11v0z"

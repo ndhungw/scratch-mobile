@@ -1,15 +1,15 @@
-import * as React from "react";
-import { TextInput, View, StyleSheet } from "react-native";
+import * as React from 'react';
+import { TextInput, View, StyleSheet } from 'react-native';
 
 // constants
-import COLORS from "../../../../constants/colors";
+import COLORS from '../../../../constants/colors';
 
 // icons
-import LoupeIcon from "../../../../assets/icons/loupe";
-import FilterIcon from "../../../../assets/icons/filter";
+import LoupeIcon from '../../../../assets/icons/loupe';
+import FilterIcon from '../../../../assets/icons/filter';
 
 // components
-import CustomizedButton from "../../../../components/Button/Button";
+import CustomizedButton from '../../../../components/Button/Button';
 
 export default function SearchBar({
   style,
@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
   container: {
     padding: 11,
     borderRadius: 8,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: COLORS.White,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 0,
@@ -52,10 +52,10 @@ const styles = StyleSheet.create({
     elevation: 12,
   },
   textInput: {
-    width: "100%",
+    width: '100%',
     marginHorizontal: 9,
     // outline: "none",
-    fontWeight: "400",
+    fontWeight: '400',
     fontSize: 14,
     lineHeight: 22,
   },

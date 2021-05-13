@@ -1,20 +1,23 @@
-import React, { useState } from "react";
-import { Text, View, StyleSheet, FlatList, Image } from "react-native";
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, FlatList } from 'react-native';
 
 // constants
-import COLORS from "../../../constants/colors";
+import COLORS from '../../../constants/colors';
 
 // icons
-import SeparatorLine from "../../../assets/icons/separator-line";
+import SeparatorLine from '../../../assets/icons/separator-line';
 
 // components
-import CustomizedButton from "../../../components/Button/Button";
-import SimpleCard from "../../../components/Card/SimpleCard";
+import CustomizedButton from '../../../components/Button/Button';
+import SimpleCard from '../../../components/Card/SimpleCard';
 
 // local
-import { simplify, capitalizeFirstLetter } from "../../../utils/utils";
+import { simplify, capitalizeFirstLetter } from '../../../utils/utils';
 
-export default function UserKitchen({ route, navigation, style, kitchen }) {
+export default function UserKitchen({
+  // route, navigation, style,
+  kitchen,
+}) {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
 
   const handleChangeCategory = (btnIndex) => {
@@ -46,18 +49,13 @@ export default function UserKitchen({ route, navigation, style, kitchen }) {
           <CustomizedButton
             key={`${category.name + index}`}
             onPress={() => handleChangeCategory(index)}
-            style={styles.kitchenTabButton}
-          >
+            style={styles.kitchenTabButton}>
             <Text style={styles.countText}>{simplify(category.count)}</Text>
-            <Text style={styles.tabNameText}>
-              {capitalizeFirstLetter(category.name)}
-            </Text>
+            <Text style={styles.tabNameText}>{capitalizeFirstLetter(category.name)}</Text>
             <View
               style={[
                 styles.bottomLine,
-                selectedCategoryIndex === index
-                  ? styles.borderHighlight
-                  : styles.borderTransparent,
+                selectedCategoryIndex === index ? styles.borderHighlight : styles.borderTransparent,
               ]}
             />
           </CustomizedButton>
@@ -87,14 +85,14 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
   kitchenTabButton: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   buttonsRowWrapper: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingHorizontal: 25,
   },
   bottomLine: {
@@ -108,21 +106,21 @@ const styles = StyleSheet.create({
     borderTopColor: COLORS.DarkGreen,
   },
   borderTransparent: {
-    borderTopColor: "transparent",
+    borderTopColor: 'transparent',
   },
   countText: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 20,
     lineHeight: 27,
   },
   tabNameText: {
-    fontWeight: "400",
+    fontWeight: '400',
     fontSize: 16,
   },
   separatorLine: {
     width: 290,
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   listContainer: {
     flex: 1,
@@ -130,11 +128,11 @@ const styles = StyleSheet.create({
   flatList: {},
   itemContainer: {
     width: 120,
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     backgroundColor: COLORS.White,
     borderRadius: 8,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 0,
@@ -150,7 +148,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 8,
   },
   itemText: {
-    fontWeight: "400",
+    fontWeight: '400',
     fontSize: 16,
     lineHeight: 22,
     margin: 5,
@@ -162,6 +160,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 25,
     marginHorizontal: 25,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
 });

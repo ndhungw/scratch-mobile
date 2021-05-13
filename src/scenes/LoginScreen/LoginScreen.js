@@ -1,36 +1,29 @@
-import React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  ImageBackground,
-  StatusBar,
-  TextInput,
-} from "react-native";
+import React from 'react';
+import { Text, View, StyleSheet, ImageBackground, StatusBar, TextInput } from 'react-native';
 
 // constants
-import COLORS from "../../constants/colors";
-import SCREENS from "../../constants/screenNames";
+import COLORS from '../../constants/colors';
+import SCREENS from '../../constants/screenNames';
 
 // images
-import imageSrc from "../../assets/images/login-bg.png";
+import imageSrc from '../../assets/images/login-bg.png';
 
 // components
-import CustomizedButton from "../../components/Button/Button";
+import CustomizedButton from '../../components/Button/Button';
 
 // test
-import TextField from "../../components/TextField/TextField";
+// import TextField from '../../components/TextField/TextField';
 
 export default function LogIn({ navigation }) {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
-  const handleChangeUsername = (event) => {
-    setUsername(event.target.value);
-  };
-  const handleChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
+  // const handleChangeUsername = (event) => {
+  //   setUsername(event.target.value);
+  // };
+  // const handleChangePassword = (event) => {
+  //   setPassword(event.target.value);
+  // };
   const handleLogin = () => {
     navigation.reset({
       index: 0,
@@ -51,9 +44,7 @@ export default function LogIn({ navigation }) {
         </View>
       </ImageBackground>
 
-      <Text style={[styles.subText, styles.subTitle]}>
-        Please log in to continue
-      </Text>
+      <Text style={[styles.subText, styles.subTitle]}>Please log in to continue</Text>
 
       <View style={styles.formContainer}>
         <View style={styles.inputView}>
@@ -81,11 +72,7 @@ export default function LogIn({ navigation }) {
           />
         </View>
 
-        <CustomizedButton
-          onPress={handleLogin}
-          style={styles.loginButton}
-          activeOpacity={0.8}
-        >
+        <CustomizedButton onPress={handleLogin} style={styles.loginButton} activeOpacity={0.8}>
           <Text style={styles.loginButtonText}>LOGIN</Text>
         </CustomizedButton>
 
@@ -106,23 +93,23 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 285,
-    resizeMode: "cover",
-    justifyContent: "center",
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
   imgMask: {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-    height: "100%",
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    height: '100%',
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   title: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 24,
     lineHeight: 32,
     paddingLeft: 25,
   },
   subText: {
-    fontWeight: "400",
+    fontWeight: '400',
     fontSize: 14,
     lineHeight: 22,
     color: COLORS.Zambezi,
@@ -133,24 +120,24 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     marginTop: 80,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   inputView: {
     marginBottom: 30,
   },
   inputLabel: {
-    fontWeight: "400",
+    fontWeight: '400',
     fontSize: 14,
     lineHeight: 22,
     color: COLORS.DarkGrey,
   },
   labelRow: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   textInput: {
     width: 280,
@@ -159,7 +146,7 @@ const styles = StyleSheet.create({
     // outline: "none",
     borderBottomWidth: 3,
     borderBottomColor: COLORS.VeryLightGrey,
-    fontWeight: "400",
+    fontWeight: '400',
     fontSize: 16,
     lineHeight: 22,
   },
@@ -171,19 +158,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 280,
     height: 50,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 30,
   },
   loginButtonText: {
     color: COLORS.White,
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
     lineHeight: 21,
   },
   strongText: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
     lineHeight: 22,
     color: COLORS.DarkGreen,

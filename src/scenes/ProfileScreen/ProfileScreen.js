@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, SafeAreaView } from "react-native";
-import AsyncStorage, {
-  useAsyncStorage,
-} from "@react-native-async-storage/async-storage";
-import { useFocusEffect } from "@react-navigation/native";
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
 // constants
-import Constants from "expo-constants";
-import COLORS from "../../constants/colors";
-import { STORAGE_KEY } from "../../constants/defaultValues";
+import Constants from 'expo-constants';
+import COLORS from '../../constants/colors';
+import { STORAGE_KEY } from '../../constants/defaultValues';
 
 // icons
-import SettingsIcon from "../../assets/icons/settings";
-import SeparatorLine from "../../assets/icons/separator-line";
+import SettingsIcon from '../../assets/icons/settings';
+import SeparatorLine from '../../assets/icons/separator-line';
 
 // components
-import CustomizedButton from "../../components/Button/Button";
+import CustomizedButton from '../../components/Button/Button';
 
 // local components
-import UserInfo from "./components/UserInfo";
-import UserKitchen from "./components/UserKitchen";
+import UserInfo from './components/UserInfo';
+import UserKitchen from './components/UserKitchen';
 
 // dummy data
-import { USER_DATA } from "./../../assets/data/data";
-import SCREENS from "../../constants/screenNames";
+import { USER_DATA } from './../../assets/data/data';
+import SCREENS from '../../constants/screenNames';
 
 export default function UserProfile({ route, navigation }) {
   const [user, setUser] = useState(USER_DATA);
@@ -32,7 +30,7 @@ export default function UserProfile({ route, navigation }) {
   // );
 
   const onPressSettings = () => {
-    alert(`Clicked settings button`);
+    alert('Clicked settings button');
   };
 
   const onPressEditProfile = () => {
@@ -47,58 +45,50 @@ export default function UserProfile({ route, navigation }) {
 
       // return () => unsubscribe();
 
-      console.log("useFocusEffect- route:", route);
-      readDataFromStorage("user01");
-    }, [])
+      console.log('useFocusEffect- route:', route);
+      readDataFromStorage('user01');
+    }, []),
   );
 
   useEffect(() => {
-    console.log("HELLOOOOOO, route", route);
+    console.log('HELLOOOOOO, route', route);
     if (route.params?.userToUpdate) {
       //!TODO: care this when actually save many user on this device.
       // just demo, so still not handle this
       const { userToUpdate } = route.params;
       // recall to update user data
       readDataFromStorage(userToUpdate.id);
-      console.log("ProfileScreen-useEffect-userToUpdate: ", userToUpdate);
+      console.log('ProfileScreen-useEffect-userToUpdate: ', userToUpdate);
       // setUser(updatedUserData);
     }
   }, [route.params?.userToUpdate]);
 
-  const readDataFromStorage = async (id) => {
+  const readDataFromStorage = async (idUser) => {
     try {
-      const userProfileStringified = await AsyncStorage.getItem(
-        `${STORAGE_KEY}_USER_user01`
-      );
+      const userProfileStringified = await AsyncStorage.getItem(`${STORAGE_KEY}_USER_${idUser}`);
       const userProfileObject = JSON.parse(userProfileStringified);
-      console.log("userProfileObject:", userProfileObject);
+      console.log('userProfileObject:', userProfileObject);
       if (userProfileStringified) {
         setUser(userProfileObject);
       } else {
-        console.log(
-          "userProfileStringified is undefined: ",
-          userProfileStringified
-        );
-        console.log("still setUser");
+        console.log('userProfileStringified is undefined: ', userProfileStringified);
+        console.log('still setUser');
         setUser(userProfileObject);
       }
     } catch (err) {
-      console.log("Error in read data from storage - Profile Screen - ", err);
+      console.log('Error in read data from storage - Profile Screen - ', err);
     }
   };
   // read user data on mount
   useEffect(() => {
-    readDataFromStorage("user01"); // pretend we got user.id in route.params from prev screen
+    readDataFromStorage('user01'); // pretend we got user.id in route.params from prev screen
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>My Kitchen</Text>
-        <CustomizedButton
-          onPress={onPressSettings}
-          style={styles.settingsButton}
-        >
+        <CustomizedButton onPress={onPressSettings} style={styles.settingsButton}>
           <SettingsIcon />
           <Text style={styles.settingsText}>Settings</Text>
         </CustomizedButton>
@@ -131,22 +121,22 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   headerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   headerTitle: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 24,
     lineHeight: 32,
   },
   settingsButton: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   settingsText: {
     color: COLORS.DarkGreen,
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
     lineHeight: 22,
     marginLeft: 5,
@@ -160,7 +150,7 @@ const styles = StyleSheet.create({
   },
   separatorLine: {
     width: 290,
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 });

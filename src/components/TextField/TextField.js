@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { View, StyleSheet, TextInput, Text, Animated } from "react-native";
-import COLORS from "../../constants/colors";
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, TextInput, Text, Animated } from 'react-native';
+import COLORS from '../../constants/colors';
 
-export default function TextField({
-  value,
-  onChangeText,
-  label,
-  placeholder,
-  ...rest
-}) {
+export default function TextField({ value, onChangeText, label, placeholder, ...rest }) {
   //   console.log("from TextField: value = ", value);
   const [isFocused, setIsFocused] = useState(false);
   //   const [hasValue, setHasValue] = useState(false);
@@ -47,9 +41,8 @@ export default function TextField({
         style={
           [styles.label, (isFocused || value) && styles.labelFocus]
           //   , { top: topOffset }
-        }
-      >
-        {label || "Label"}
+        }>
+        {label || 'Label'}
       </Text>
       <TextInput
         value={value}
@@ -67,15 +60,15 @@ const styles = StyleSheet.create({
   input: {
     borderBottomWidth: 2,
     borderBottomColor: COLORS.VeryLightGrey,
-    fontWeight: "400",
+    fontWeight: '400',
     lineHeight: 22,
     fontSize: 16,
   },
   label: {
-    fontWeight: "400",
+    fontWeight: '400',
     fontSize: 16,
     lineHeight: 22,
-    position: "relative",
+    position: 'relative',
     top: 25,
     color: COLORS.VampireBlack,
   },

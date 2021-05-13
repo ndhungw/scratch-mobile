@@ -1,32 +1,30 @@
-import React from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
-import { Avatar } from "react-native-elements";
+import React from 'react';
+import { Text, View, StyleSheet, Image } from 'react-native';
 
 // constants
-import COLORS from "../../../constants/colors";
+import COLORS from '../../../constants/colors';
 import {
   USER_AVATAR_SRC,
   USER_DISPLAY_NAME,
   USER_TITLE,
   USER_FOLLOWERS_COUNT,
   USER_LIKES_COUNT,
-} from "../../../constants/defaultValues";
+} from '../../../constants/defaultValues';
 
 // icons
-import EditIcon from "../../../assets/icons/edit";
-import DotIcon from "../../../assets/icons/dot";
+import EditIcon from '../../../assets/icons/edit';
+import DotIcon from '../../../assets/icons/dot';
 
 // components
-import CustomizedButton from "../../../components/Button/Button";
+import CustomizedButton from '../../../components/Button/Button';
 
 // utils
-import { simplify } from "../../../utils/utils";
-import SCREENS from "../../../constants/screenNames";
+import { simplify } from '../../../utils/utils';
 
 export default function UserInfo({
   style,
   // UserInfo props
-  id,
+  // id,
   avatarUri,
   fullName,
   bio,
@@ -44,21 +42,13 @@ export default function UserInfo({
           rounded
           style={styles.avatar}
         /> */}
-        <Image
-          style={styles.avatar}
-          source={avatarUri ? { uri: avatarUri } : USER_AVATAR_SRC}
-        />
+        <Image style={styles.avatar} source={avatarUri ? { uri: avatarUri } : USER_AVATAR_SRC} />
       </View>
       <View style={styles.userInfoRight}>
         <View>
           <View style={styles.userInfoNameWrapper}>
-            <Text style={styles.userInfoName}>
-              {fullName || USER_DISPLAY_NAME}
-            </Text>
-            <CustomizedButton
-              onPress={onPressEditProfile}
-              style={styles.editButton}
-            >
+            <Text style={styles.userInfoName}>{fullName || USER_DISPLAY_NAME}</Text>
+            <CustomizedButton onPress={onPressEditProfile} style={styles.editButton}>
               <EditIcon />
             </CustomizedButton>
           </View>
@@ -82,8 +72,8 @@ export default function UserInfo({
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
   },
   avatar: {
     width: 82,
@@ -95,35 +85,35 @@ const styles = StyleSheet.create({
   },
   userInfoRight: {
     flexGrow: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   userInfoNameWrapper: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   userInfoName: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
     lineHeight: 22,
   },
   editButton: {},
   userTitle: {
-    fontWeight: "400",
+    fontWeight: '400',
     fontSize: 14,
     lineHeight: 22,
     color: COLORS.Zambezi,
   },
   popularCounts: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
   },
   popularCountsText: {
     color: COLORS.Zambezi,
     fontSize: 14,
-    fontWeight: "400",
+    fontWeight: '400',
     lineHeight: 22,
   },
 });

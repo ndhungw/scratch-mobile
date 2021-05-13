@@ -1,25 +1,25 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // constants
-import COLORS from "../constants/colors";
-import SCREENS from "../constants/screenNames";
+import COLORS from '../constants/colors';
+import SCREENS from '../constants/screenNames';
 
 // icons
-import LoupeIcon from "../assets/icons/loupe";
-import FeedIcon from "../assets/icons/feed";
-import ProfileIcon from "../assets/icons/profile";
+import LoupeIcon from '../assets/icons/loupe';
+import FeedIcon from '../assets/icons/feed';
+import ProfileIcon from '../assets/icons/profile';
 
 // scenes
-import LogInScreen from "../scenes/LogInScreen/LogInScreen";
-import SignUpScreen from "../scenes/LogInScreen/LogInScreen";
-import FeedVerticalScrollScreen from "../scenes/FeedScreen/FeedVerticalScrollScreen";
-import FeedDetailsScreen from "../scenes/FeedDetailsScreen/FeedDetailsScreen";
-import ProfileScreen from "../scenes/ProfileScreen/ProfileScreen";
-import EditProfileScreen from "../scenes/EditProfileScreen/EditProfileScreen";
-import SearchScreen from "../scenes/SearchScreen/SearchScreen";
-import TestScreen from "../scenes/TestScreen/TestScreen";
+import LogInScreen from '../scenes/LogInScreen/LogInScreen';
+import SignUpScreen from '../scenes/LogInScreen/LogInScreen';
+import FeedVerticalScrollScreen from '../scenes/FeedScreen/FeedVerticalScrollScreen';
+import FeedDetailsScreen from '../scenes/FeedDetailsScreen/FeedDetailsScreen';
+import ProfileScreen from '../scenes/ProfileScreen/ProfileScreen';
+import EditProfileScreen from '../scenes/EditProfileScreen/EditProfileScreen';
+// import SearchScreen fr"m '../scenes/SearchScreen/SearchScr"en';
+import TestScreen from '../scenes/TestScreen/TestScreen';
 
 const AuthStack = createStackNavigator();
 const SearchStack = createStackNavigator();
@@ -69,10 +69,7 @@ function FeedStackNavigator() {
         component={FeedVerticalScrollScreen}
         options={{ headerShown: false }}
       />
-      <FeedStack.Screen
-        name={SCREENS.FEED_DETAILS_SCREEN}
-        component={FeedDetailsScreen}
-      />
+      <FeedStack.Screen name={SCREENS.FEED_DETAILS_SCREEN} component={FeedDetailsScreen} />
     </FeedStack.Navigator>
   );
 }
@@ -98,27 +95,18 @@ function TabStackNavigator() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({
+          focused,
+          // , color, size
+        }) => {
           let renderIcon;
 
           if (route.name === SCREENS.SEARCH_SCREEN) {
-            renderIcon = focused ? (
-              <LoupeIcon stroke={COLORS.DarkGreen} />
-            ) : (
-              <LoupeIcon />
-            );
+            renderIcon = focused ? <LoupeIcon stroke={COLORS.DarkGreen} /> : <LoupeIcon />;
           } else if (route.name === SCREENS.FEED_VERTICAL_SCROLL_SCREEN) {
-            renderIcon = focused ? (
-              <FeedIcon stroke={COLORS.DarkGreen} />
-            ) : (
-              <FeedIcon />
-            );
+            renderIcon = focused ? <FeedIcon stroke={COLORS.DarkGreen} /> : <FeedIcon />;
           } else if (route.name === SCREENS.PROFILE_SCREEN) {
-            renderIcon = focused ? (
-              <ProfileIcon stroke={COLORS.DarkGreen} />
-            ) : (
-              <ProfileIcon />
-            );
+            renderIcon = focused ? <ProfileIcon stroke={COLORS.DarkGreen} /> : <ProfileIcon />;
           }
 
           return renderIcon;
@@ -129,20 +117,10 @@ function TabStackNavigator() {
         activeTintColor: COLORS.DarkGreen,
         inactiveTintColor: COLORS.DarkGrey,
         style: { borderTopWidth: 0 },
-      }}
-    >
-      <Tab.Screen
-        name={SCREENS.SEARCH_SCREEN}
-        component={SearchStackNavigator}
-      />
-      <Tab.Screen
-        name={SCREENS.FEED_VERTICAL_SCROLL_SCREEN}
-        component={FeedStackNavigator}
-      />
-      <Tab.Screen
-        name={SCREENS.PROFILE_SCREEN}
-        component={ProfileStackNavigator}
-      />
+      }}>
+      <Tab.Screen name={SCREENS.SEARCH_SCREEN} component={SearchStackNavigator} />
+      <Tab.Screen name={SCREENS.FEED_VERTICAL_SCROLL_SCREEN} component={FeedStackNavigator} />
+      <Tab.Screen name={SCREENS.PROFILE_SCREEN} component={ProfileStackNavigator} />
     </Tab.Navigator>
   );
 }

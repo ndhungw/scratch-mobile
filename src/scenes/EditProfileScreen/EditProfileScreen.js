@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-  StatusBar,
-} from "react-native";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import * as ImagePicker from "expo-image-picker";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Image, StatusBar } from 'react-native';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import * as ImagePicker from 'expo-image-picker';
 
 // constants
 import {
@@ -17,27 +10,22 @@ import {
   USER_TITLE,
   USER_EMAIL,
   USER_PHONE,
-} from "../../constants/defaultValues";
-import COLORS from "../../constants/colors";
-import { STORAGE_KEY } from "../../constants/defaultValues";
+} from '../../constants/defaultValues';
+import COLORS from '../../constants/colors';
+import { STORAGE_KEY } from '../../constants/defaultValues';
 
 // components
-import CustomizedButton from "../../components/Button/Button";
-import TextField from "../../components/TextField/TextField";
+import CustomizedButton from '../../components/Button/Button';
+import TextField from '../../components/TextField/TextField';
 
 // icons
-import ArrowLeftIcon from "../../assets/icons/arrow-left";
+import ArrowLeftIcon from '../../assets/icons/arrow-left';
 
-import {
-  isValidName,
-  isValidBio,
-  isValidEmail,
-  isValidPhoneNumber,
-} from "./validate";
-import SCREENS from "../../constants/screenNames";
+import { isValidName, isValidBio, isValidEmail, isValidPhoneNumber } from './validate';
+import SCREENS from '../../constants/screenNames';
 
 export default function EditProfileScreen({ route, navigation }) {
-  const [avatarUri, setAvatarUri] = useState("");
+  const [avatarUri, setAvatarUri] = useState('');
   const [fullName, setFullName] = useState(USER_DISPLAY_NAME);
   const [bio, setBio] = useState(USER_TITLE);
   const [email, setEmail] = useState(USER_EMAIL);
@@ -49,29 +37,29 @@ export default function EditProfileScreen({ route, navigation }) {
 
   const onChangeFullName = (userFullName) => {
     setFullName(userFullName);
-    if (isValidName(userFullName)) {
-    } else {
-      // console.log("Invalid full name");
-    }
+    // if (isValidName(userFullName)) {
+    // } else {
+    //   console.log("Invalid full name");
+    // }
   };
   const onChangeBio = (userBio) => {
     setBio(userBio);
-    if (isValidBio(userBio)) {
-    }
+    // if (isValidBio(userBio)) {
+    // }
   };
   const onChangeEmail = (userEmail) => {
     setEmail(userEmail);
-    if (isValidEmail(userEmail)) {
-    } else {
-      // console.log("Invalid email");
-    }
+    // if (isValidEmail(userEmail)) {
+    // } else {
+    //   console.log("Invalid email");
+    // }
   };
   const onChangePhone = (userPhoneNumber) => {
     setPhone(userPhoneNumber);
-    if (isValidPhoneNumber(userPhoneNumber)) {
-    } else {
-      // console.log("Invalid Phone");
-    }
+    // if (isValidPhoneNumber(userPhoneNumber)) {
+    // } else {
+    //   console.log("Invalid Phone");
+    // }
   };
 
   const onPressBackToProfile = () => {
@@ -80,23 +68,23 @@ export default function EditProfileScreen({ route, navigation }) {
 
   const onPressSaveProfile = async () => {
     if (!isValidName(fullName)) {
-      console.log("Invalid full name");
-      alert(`Invalid full name`);
+      console.log('Invalid full name');
+      alert('Invalid full name');
       return;
     }
     if (!isValidBio(bio)) {
-      console.log("Invalid bio");
-      alert(`Invalid bio`);
+      console.log('Invalid bio');
+      alert('Invalid bio');
       return;
     }
     if (!isValidEmail(email)) {
-      console.log("Invalid email");
-      alert(`Invalid email`);
+      console.log('Invalid email');
+      alert('Invalid email');
       return;
     }
     if (!isValidPhoneNumber(phone)) {
-      console.log("Invalid phone number");
-      alert(`Invalid phone`);
+      console.log('Invalid phone number');
+      alert('Invalid phone');
       return;
     }
 
@@ -112,14 +100,14 @@ export default function EditProfileScreen({ route, navigation }) {
       const userDataStringified = JSON.stringify(userProfileDataToMerge);
       await mergeItem(userDataStringified); // attempt to save data to local
       // console.log("userDataStringified", userDataStringified);
-      alert(`Save Profile Successfully!`); // !TODO: Custom alert here for more info
+      alert('Save Profile Successfully!'); // !TODO: Custom alert here for more info
     } catch (err) {
-      alert(`An error occurs when trying to save!\nPlease try again`);
+      alert('An error occurs when trying to save!\nPlease try again');
       console.log(err);
     }
 
     // Pass and merge params back to Profile screen
-    console.log("Prepare for pass params back - userToUpdate.id: ", user.id);
+    console.log('Prepare for pass params back - userToUpdate.id: ', user.id);
     navigation.navigate({
       name: SCREENS.PROFILE_SCREEN,
       params: {
@@ -128,11 +116,11 @@ export default function EditProfileScreen({ route, navigation }) {
       },
       merge: true,
     });
-    console.log("route:", route);
+    console.log('route:', route);
   };
 
   const onPressEditAvatar = async () => {
-    console.log(`Edit Profile Picture`);
+    console.log('Edit Profile Picture');
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -145,16 +133,16 @@ export default function EditProfileScreen({ route, navigation }) {
 
       if (!result.cancelled) {
         setAvatarUri(result.uri);
-        alert(`Update avatar successfully`);
+        alert('Update avatar successfully');
       }
     } catch (err) {
-      console.log("Error occurs in onPressEditAvatar", err);
+      console.log('Error occurs in onPressEditAvatar', err);
     }
   };
 
   const readDataFromStorage = async () => {
     const userProfileData = await getItem();
-    console.log("readDataFromStorage: userProfileData=", userProfileData);
+    console.log('readDataFromStorage: userProfileData=', userProfileData);
 
     if (!userProfileData) {
       return;
@@ -164,10 +152,7 @@ export default function EditProfileScreen({ route, navigation }) {
     setUser(userProfileObj);
 
     if (userProfileObj.avatarUri) {
-      console.log(
-        `SET AVATAR URI: ${typeof userProfileObj.avatarUri} `,
-        userProfileObj.avatarUri
-      );
+      console.log(`SET AVATAR URI: ${typeof userProfileObj.avatarUri} `, userProfileObj.avatarUri);
       setAvatarUri(userProfileObj.avatarUri);
     }
     if (userProfileObj.fullName) {
@@ -196,10 +181,7 @@ export default function EditProfileScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.backButtonWrapper}>
-        <CustomizedButton
-          onPress={onPressBackToProfile}
-          style={styles.backButton}
-        >
+        <CustomizedButton onPress={onPressBackToProfile} style={styles.backButton}>
           <ArrowLeftIcon />
           <Text style={styles.backButtonText}>Back to Profile</Text>
         </CustomizedButton>
@@ -213,10 +195,10 @@ export default function EditProfileScreen({ route, navigation }) {
             style={styles.avatar}
             source={avatarUri ? { uri: `${avatarUri}` } : USER_AVATAR_SRC}
             onLoad={() => {
-              console.log("loaded image!", avatarUri);
+              console.log('loaded image!', avatarUri);
             }}
             onLoadStart={() => {
-              console.log("load starting", avatarUri);
+              console.log('load starting', avatarUri);
             }}
           />
 
@@ -259,10 +241,7 @@ export default function EditProfileScreen({ route, navigation }) {
           />
         </View>
 
-        <CustomizedButton
-          onPress={onPressSaveProfile}
-          style={styles.saveButton}
-        >
+        <CustomizedButton onPress={onPressSaveProfile} style={styles.saveButton}>
           <Text style={styles.saveButtonText}>Save Profile</Text>
         </CustomizedButton>
       </View>
@@ -273,13 +252,13 @@ export default function EditProfileScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     padding: 25,
     paddingTop: StatusBar.currentHeight,
   },
   screenTitle: {
-    alignSelf: "flex-start",
-    fontWeight: "700",
+    alignSelf: 'flex-start',
+    fontWeight: '700',
     fontSize: 24,
     lineHeight: 32,
     // backgroundColor: "violet",
@@ -290,7 +269,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   changeAvtBtnText: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
     lineHeight: 22,
     color: COLORS.DarkGreen,
@@ -299,55 +278,55 @@ const styles = StyleSheet.create({
   },
   form: {
     // backgroundColor: "green",
-    width: "100%",
+    width: '100%',
     flex: 1,
   },
   infoWrapper: {
     marginTop: 22,
     // flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   textField: {
     // backgroundColor: "violet",
-    width: "100%",
+    width: '100%',
     marginVertical: 12,
   },
   sectionTitle: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
     lineHeight: 22,
     color: COLORS.VampireBlack,
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
   },
   backButton: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   backButtonText: {
-    fontWeight: "400",
+    fontWeight: '400',
     fontSize: 12,
     color: COLORS.Grey,
   },
   backButtonWrapper: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     marginLeft: -10,
     marginBottom: 15,
   },
   saveButton: {
     marginTop: 18,
-    alignSelf: "center",
-    width: "100%",
+    alignSelf: 'center',
+    width: '100%',
     height: 50,
     borderRadius: 8,
     backgroundColor: COLORS.DarkGreen,
   },
   saveButtonText: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: "auto",
-    marginBottom: "auto",
-    fontWeight: "700",
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    fontWeight: '700',
     fontSize: 16,
     lineHeight: 21,
     color: COLORS.White,

@@ -1,6 +1,5 @@
 const isValidEmail = (email) => {
-  const regex =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   return regex.test(email);
 };
@@ -12,22 +11,22 @@ const isValidPhoneNumber = (phone) => {
 
 const isValidName = (name) => {
   if (isEmpty(name)) {
-    console.log("is empty");
+    console.log('is empty');
     return false;
   }
   if (isTooShort(name)) {
-    console.log("is too short");
+    console.log('is too short');
     return false;
   }
   if (isContainsDigits(name)) {
-    console.log("contains digits");
+    console.log('contains digits');
     return false;
   }
   return true;
 };
 
 const isValidBio = (bio) => {
-  return true;
+  return Boolean(bio);
 };
 
 // helpers

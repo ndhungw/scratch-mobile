@@ -1,5 +1,5 @@
-import * as React from "react";
-import Svg, { Path } from "react-native-svg";
+import * as React from 'react';
+import Svg, { Path } from 'react-native-svg';
 
 export default function MessageIcon(props) {
   return (
@@ -9,8 +9,7 @@ export default function MessageIcon(props) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+      {...props}>
       <Path
         d="M5 7.5l7 5M19 7.5l-7 5"
         stroke="#363837"

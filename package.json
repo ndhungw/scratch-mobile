@@ -4,7 +4,9 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
-    "start": "react-native start"
+    "start": "react-native start",
+    "lint": "eslint ./src/",
+    "format": "prettier --check ./src"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.4",
@@ -29,7 +31,11 @@
     "expo-image-picker": "~10.1.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
-  },
-  "private": true
+    "@babel/core": "^7.9.0",
+    "eslint": "^7.26.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.0"
+  }
 }

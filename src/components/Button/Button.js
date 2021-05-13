@@ -1,5 +1,5 @@
-import * as React from "react";
-import { TouchableOpacity } from "react-native";
+import * as React from 'react';
+import { TouchableOpacity } from 'react-native';
 
 export default function CustomizedButton({ onPress, children, ...rest }) {
   return (
