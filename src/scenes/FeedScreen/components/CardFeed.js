@@ -94,7 +94,7 @@ export default function CardFeed({
         </View>
         <CustomizedButton
           style={styles.saveButton}
-          onPress={handleSave}
+          onPress={() => handleSave(id)}
           activeOpacity={0.8}
         >
           <PlusIcon style={styles.plusIcon} />

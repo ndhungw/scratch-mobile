@@ -29,8 +29,8 @@ export default function UserKitchen({ route, navigation, style, kitchen }) {
   const categoryItem = ({ item }) => {
     return (
       <SimpleCard
-        imageSrc={item.imageSrc}
-        title={item.name}
+        imageUri={item.imageSrc}
+        title={item.title}
         onPress={() => handleCardClick(item.id)}
         imageStyle={styles.itemImage}
         textStyle={styles.itemText}
@@ -68,6 +68,7 @@ export default function UserKitchen({ route, navigation, style, kitchen }) {
 
       <View style={styles.listContainer}>
         <FlatList
+          style={styles.flatList}
           data={kitchen[selectedCategoryIndex].data}
           renderItem={categoryItem}
           numColumns={2}
@@ -82,6 +83,7 @@ export default function UserKitchen({ route, navigation, style, kitchen }) {
 
 const styles = StyleSheet.create({
   userKitchen: {
+    flex: 1,
     marginTop: 25,
   },
   kitchenTabButton: {
@@ -122,7 +124,10 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
   },
-  listContainer: {},
+  listContainer: {
+    flex: 1,
+  },
+  flatList: {},
   itemContainer: {
     width: 120,
     display: "flex",
@@ -151,11 +156,12 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   itemSeparator: {
-    margin: 15,
+    // margin: 10,
   },
   columnWrapperStyle: {
-    marginTop: 15,
-    marginHorizontal: 15,
+    marginTop: 10,
+    marginBottom: 25,
+    marginHorizontal: 25,
     justifyContent: "space-between",
   },
 });

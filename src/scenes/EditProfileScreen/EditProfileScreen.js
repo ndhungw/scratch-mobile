@@ -1,8 +1,14 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
-import CustomizedButton from "../../components/Button/Button";
-import TextField from "../../components/TextField/TextField";
-import COLORS from "../../constants/colors";
+import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Image,
+  StatusBar,
+} from "react-native";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import * as ImagePicker from "expo-image-picker";
 
 // constants
 import {
@@ -12,41 +18,180 @@ import {
   USER_EMAIL,
   USER_PHONE,
 } from "../../constants/defaultValues";
+import COLORS from "../../constants/colors";
+import { STORAGE_KEY } from "../../constants/defaultValues";
 
+// components
+import CustomizedButton from "../../components/Button/Button";
+import TextField from "../../components/TextField/TextField";
+
+// icons
 import ArrowLeftIcon from "../../assets/icons/arrow-left";
-import { StatusBar } from "react-native";
+
+import {
+  isValidName,
+  isValidBio,
+  isValidEmail,
+  isValidPhoneNumber,
+} from "./validate";
+import SCREENS from "../../constants/screenNames";
 
 export default function EditProfileScreen({ route, navigation }) {
+  const [avatarUri, setAvatarUri] = useState("");
   const [fullName, setFullName] = useState(USER_DISPLAY_NAME);
   const [bio, setBio] = useState(USER_TITLE);
   const [email, setEmail] = useState(USER_EMAIL);
   const [phone, setPhone] = useState(USER_PHONE);
+  const [user, setUser] = useState({});
 
-  const onChangeFullName = (text) => {
-    // !TODO: check by regex
-    setFullName(text);
+  // key: @ScratchMobile_HungND73_UserProfileData
+  const { getItem, mergeItem } = useAsyncStorage(`${STORAGE_KEY}_USER_user01`);
+
+  const onChangeFullName = (userFullName) => {
+    setFullName(userFullName);
+    if (isValidName(userFullName)) {
+    } else {
+      // console.log("Invalid full name");
+    }
   };
-  const onChangeBio = (text) => {
-    // !TODO: check by regex
-    setBio(text);
+  const onChangeBio = (userBio) => {
+    setBio(userBio);
+    if (isValidBio(userBio)) {
+    }
   };
-  const onChangeEmail = (text) => {
-    // !TODO: check by regex
-    setEmail(text);
+  const onChangeEmail = (userEmail) => {
+    setEmail(userEmail);
+    if (isValidEmail(userEmail)) {
+    } else {
+      // console.log("Invalid email");
+    }
   };
-  const onChangePhone = (text) => {
-    // !TODO: check by phone
-    setPhone(text);
+  const onChangePhone = (userPhoneNumber) => {
+    setPhone(userPhoneNumber);
+    if (isValidPhoneNumber(userPhoneNumber)) {
+    } else {
+      // console.log("Invalid Phone");
+    }
   };
+
   const onPressBackToProfile = () => {
     navigation.goBack();
   };
-  const onPressSaveProfile = () => {
-    alert(`Save Profile`);
+
+  const onPressSaveProfile = async () => {
+    if (!isValidName(fullName)) {
+      console.log("Invalid full name");
+      alert(`Invalid full name`);
+      return;
+    }
+    if (!isValidBio(bio)) {
+      console.log("Invalid bio");
+      alert(`Invalid bio`);
+      return;
+    }
+    if (!isValidEmail(email)) {
+      console.log("Invalid email");
+      alert(`Invalid email`);
+      return;
+    }
+    if (!isValidPhoneNumber(phone)) {
+      console.log("Invalid phone number");
+      alert(`Invalid phone`);
+      return;
+    }
+
+    const userProfileDataToMerge = {
+      fullName,
+      bio,
+      email,
+      phone,
+      avatarUri,
+    };
+
+    try {
+      const userDataStringified = JSON.stringify(userProfileDataToMerge);
+      await mergeItem(userDataStringified); // attempt to save data to local
+      // console.log("userDataStringified", userDataStringified);
+      alert(`Save Profile Successfully!`); // !TODO: Custom alert here for more info
+    } catch (err) {
+      alert(`An error occurs when trying to save!\nPlease try again`);
+      console.log(err);
+    }
+
+    // Pass and merge params back to Profile screen
+    console.log("Prepare for pass params back - userToUpdate.id: ", user.id);
+    navigation.navigate({
+      name: SCREENS.PROFILE_SCREEN,
+      params: {
+        userToUpdate: { id: user.id },
+        // idUserNeedToUpdate: userProfileData.
+      },
+      merge: true,
+    });
+    console.log("route:", route);
   };
-  const onPressEditAvatar = () => {
-    alert(`Edit Profile Picture`);
+
+  const onPressEditAvatar = async () => {
+    console.log(`Edit Profile Picture`);
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+
+      console.log(result);
+
+      if (!result.cancelled) {
+        setAvatarUri(result.uri);
+        alert(`Update avatar successfully`);
+      }
+    } catch (err) {
+      console.log("Error occurs in onPressEditAvatar", err);
+    }
   };
+
+  const readDataFromStorage = async () => {
+    const userProfileData = await getItem();
+    console.log("readDataFromStorage: userProfileData=", userProfileData);
+
+    if (!userProfileData) {
+      return;
+    }
+
+    const userProfileObj = JSON.parse(userProfileData);
+    setUser(userProfileObj);
+
+    if (userProfileObj.avatarUri) {
+      console.log(
+        `SET AVATAR URI: ${typeof userProfileObj.avatarUri} `,
+        userProfileObj.avatarUri
+      );
+      setAvatarUri(userProfileObj.avatarUri);
+    }
+    if (userProfileObj.fullName) {
+      setFullName(userProfileObj.fullName);
+    }
+    if (userProfileObj.bio) {
+      setBio(userProfileObj.bio);
+    }
+    if (userProfileObj.email) {
+      setEmail(userProfileObj.email);
+    }
+    if (userProfileObj.phone) {
+      setPhone(userProfileObj.phone);
+    }
+  };
+
+  // read data on mount
+  useEffect(() => {
+    readDataFromStorage();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("avatarUri:", avatarUri);
+  // }, [fullName]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -64,7 +209,16 @@ export default function EditProfileScreen({ route, navigation }) {
 
       <View style={styles.form}>
         <View style={styles.infoWrapper}>
-          <Image style={styles.avatar} source={USER_AVATAR_SRC} />
+          <Image
+            style={styles.avatar}
+            source={avatarUri ? { uri: `${avatarUri}` } : USER_AVATAR_SRC}
+            onLoad={() => {
+              console.log("loaded image!", avatarUri);
+            }}
+            onLoadStart={() => {
+              console.log("load starting", avatarUri);
+            }}
+          />
 
           <CustomizedButton onPress={onPressEditAvatar}>
             <Text style={styles.changeAvtBtnText}>Edit Profile Picture</Text>
@@ -133,6 +287,7 @@ const styles = StyleSheet.create({
   avatar: {
     width: 100,
     height: 100,
+    borderRadius: 50,
   },
   changeAvtBtnText: {
     fontWeight: "700",

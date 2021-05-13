@@ -48,7 +48,7 @@ export default function SearchSuggestion({ route, navigation }) {
   const simpleCardItem = ({ item }) => {
     return (
       <SimpleCard
-        imageSrc={item.imageSrc}
+        imageUri={item.imageSrc}
         title={item.name}
         onPress={() => handleClickCard(item.id)}
         style={styles.itemContainer}

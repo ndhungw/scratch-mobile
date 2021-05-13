@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 import { Avatar } from "react-native-elements";
 
 // constants
@@ -26,9 +26,10 @@ import SCREENS from "../../../constants/screenNames";
 export default function UserInfo({
   style,
   // UserInfo props
-  avatarSrc,
-  displayName,
-  title,
+  id,
+  avatarUri,
+  fullName,
+  bio,
   followersCount,
   likesCount,
   onPressEditProfile,
@@ -37,17 +38,22 @@ export default function UserInfo({
   return (
     <View style={[style, styles.container]} {...rest}>
       <View style={styles.userInfoLeft}>
-        <Avatar
-          source={avatarSrc || USER_AVATAR_SRC}
+        {/* <Avatar
+          // source={avatarSrc || USER_AVATAR_SRC}
+          source={avatarSrc ? { uri: avatarSrc } : USER_AVATAR_SRC}
           rounded
           style={styles.avatar}
+        /> */}
+        <Image
+          style={styles.avatar}
+          source={avatarUri ? { uri: avatarUri } : USER_AVATAR_SRC}
         />
       </View>
       <View style={styles.userInfoRight}>
         <View>
           <View style={styles.userInfoNameWrapper}>
             <Text style={styles.userInfoName}>
-              {displayName || USER_DISPLAY_NAME}
+              {fullName || USER_DISPLAY_NAME}
             </Text>
             <CustomizedButton
               onPress={onPressEditProfile}
@@ -57,7 +63,7 @@ export default function UserInfo({
             </CustomizedButton>
           </View>
 
-          <Text style={styles.userTitle}>{title || USER_TITLE}</Text>
+          <Text style={styles.userTitle}>{bio || USER_TITLE}</Text>
         </View>
 
         <View style={styles.popularCounts}>
@@ -82,6 +88,7 @@ const styles = StyleSheet.create({
   avatar: {
     width: 82,
     height: 82,
+    borderRadius: 50,
   },
   userInfoLeft: {
     marginRight: 15,

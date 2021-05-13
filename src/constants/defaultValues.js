@@ -1,4 +1,5 @@
 import AvatarSrc from "../assets/images/avatar.png";
+import recipeImageSource from "../assets/images/recipe.png";
 
 // RECIPE_FEED
 const RECIPE_DESCRIPTION_SAMPLE =
@@ -8,6 +9,7 @@ const RECIPE_PROFILE_NAME_SAMPLE = "Profile name";
 const RECIPE_TIME_SAMPLE = "2h";
 const RECIPE_LIKES_COUNT_SAMPLE = 32;
 const RECIPE_COMMENTS_COUNT_SAMPLE = 8;
+const RECIPE_IMAGE_SOURCE_SAMPLE = recipeImageSource;
 
 // USER_INFO
 const USER_AVATAR_SRC = AvatarSrc;
@@ -16,7 +18,10 @@ const USER_TITLE = "Potato Master";
 const USER_FOLLOWERS_COUNT = 0;
 const USER_LIKES_COUNT = 0;
 const USER_EMAIL = "user@email.com";
-const USER_PHONE = "0 12 345 6789";
+const USER_PHONE = "0123456789";
+
+// Storage
+const STORAGE_KEY = "@ScratchMobile_HungND73";
 
 export {
   RECIPE_DESCRIPTION_SAMPLE,
@@ -25,6 +30,7 @@ export {
   RECIPE_TIME_SAMPLE,
   RECIPE_LIKES_COUNT_SAMPLE,
   RECIPE_COMMENTS_COUNT_SAMPLE,
+  RECIPE_IMAGE_SOURCE_SAMPLE,
   // USER INFO
   USER_AVATAR_SRC,
   USER_DISPLAY_NAME,
@@ -33,4 +39,6 @@ export {
   USER_LIKES_COUNT,
   USER_EMAIL,
   USER_PHONE,
+  //
+  STORAGE_KEY,
 };
